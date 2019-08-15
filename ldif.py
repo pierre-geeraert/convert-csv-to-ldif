@@ -38,3 +38,5 @@ with open('ldif.csv', newline='') as csvfile:
         writeFile("uid: "+sn)
         writeFile("uidnumber: "+str(gidnumber))
         writeFile("userpassword: {MD5}gnzLDuqKcGxMNKFokfhOew==\n\n")
+     csvfile.close()
+f.close()

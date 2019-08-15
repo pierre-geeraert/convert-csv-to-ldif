@@ -1,0 +1,19 @@
+# Entry 1: cn=monsieur mr,dc=domain,dc=fr
+dn: cn=monsieur mr,dc=domain,dc=fr
+cn: monsieur mr
+description: birthday: 2000-01-01 00:00:00
+gidnumber: 101
+givenname: monsieur
+homedirectory: /home/users/101
+mail: unknow@mail.com
+mobile: 0000000000
+objectclass: inetOrgPerson
+objectclass: posixAccount
+objectclass: top
+postaladdress: unknow
+sn: monsieur
+uid: monsieur
+uidnumber: 101
+userpassword: {MD5}gnzLDuqKcGxMNKFokfhOew==
+
+
