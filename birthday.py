@@ -44,4 +44,4 @@ def explore_entries_find_birthday(entries_in):
 
 #print(explore_entries_find_birthday(entries))
 text = ''.join(explore_entries_find_birthday(entries))
-send_pushbullet_notif("Birthday","Happy birthday for : "+text)
+send_pushbullet_notif("Birthday of "+str(datetime.date.today())+" hour:"+str(datetime.datetime.now().hour)+":"+str(datetime.datetime.now().minute),"Happy birthday for : "+text)
