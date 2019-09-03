@@ -107,4 +107,4 @@ venv.bak/
 #perso
 ignore
 ignore/*
-connection.py
+ldap_connection.py
