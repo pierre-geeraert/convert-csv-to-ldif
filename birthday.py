@@ -1,6 +1,7 @@
 from ldap_connection import BaseDN
 from ldap_function import make_connection,readCredential
 import datetime
+from pushbullet_sender import send_pushbullet_notif
 from ldap3.utils.conv import escape_bytes
 
 PathCredential_ldap = "ignore/ldap_credential.json"
@@ -15,8 +16,8 @@ def if_the_date_is_today(date_in):
         return False
 
 #list all people in specific "ou", attributes should be on quotes and separate with comma
-def list_people_in_ou(ou_in,connection_in):
-    entries = connection.extend.standard.paged_search('ou='+ou_in+',' + BaseDN, '(objectClass=person)',attributes=['cn', 'givenName', 'homePhone'])
+def list_people_in_ou(connection_in):
+    entries = connection.extend.standard.paged_search(BaseDN, '(objectClass=person)',attributes=['cn', 'givenName', 'homePhone'])
     """
     for entry in entries:
         
@@ -26,7 +27,7 @@ def list_people_in_ou(ou_in,connection_in):
     return entries
 
 connection = make_connection(PathCredential_ldap,BaseDN)
-entries = list_people_in_ou("test",connection)
+entries = list_people_in_ou(connection)
 
 #explore entries_in and search occurence with date
 def explore_entries_find_birthday(entries_in):
@@ -36,22 +37,11 @@ def explore_entries_find_birthday(entries_in):
         homePhone = entry['attributes']['homePhone']
         homePhone_string = ''.join(homePhone)
         if if_the_date_is_today(homePhone_string):
-            print("Happy birthday " + name_entry_string)
+            #print("Happy birthday " + name_entry_string)
             list.append(name_entry_string)
+            list.append(" ")
     return list
 
-print(explore_entries_find_birthday(entries))
-
-"""
-for entry in entries:
-    name_entry_string = ''.join(entry['attributes']['givenname'])
-    homePhone = entry['attributes']['homePhone']
-    homePhone_string = ''.join(homePhone)
-    print(if_the_date_is_today(homePhone_string))
-    if if_the_date_is_today(homePhone_string):
-        print("Happy birthday "+name_entry_string)
-"""
-
-
-
-
+#print(explore_entries_find_birthday(entries))
+text = ''.join(explore_entries_find_birthday(entries))
+send_pushbullet_notif("Birthday","Happy birthday for : "+text)
