@@ -27,13 +27,30 @@ def list_people_in_ou(ou_in,connection_in):
 
 connection = make_connection(PathCredential_ldap,BaseDN)
 entries = list_people_in_ou("test",connection)
+
+#explore entries_in and search occurence with date
+def explore_entries_find_birthday(entries_in):
+    list = []
+    for entry in entries_in:
+        name_entry_string = ''.join(entry['attributes']['givenname'])
+        homePhone = entry['attributes']['homePhone']
+        homePhone_string = ''.join(homePhone)
+        if if_the_date_is_today(homePhone_string):
+            print("Happy birthday " + name_entry_string)
+            list.append(name_entry_string)
+    return list
+
+print(explore_entries_find_birthday(entries))
+
+"""
 for entry in entries:
     name_entry_string = ''.join(entry['attributes']['givenname'])
     homePhone = entry['attributes']['homePhone']
     homePhone_string = ''.join(homePhone)
+    print(if_the_date_is_today(homePhone_string))
     if if_the_date_is_today(homePhone_string):
         print("Happy birthday "+name_entry_string)
-
+"""
 
 
 
