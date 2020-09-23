@@ -108,3 +108,5 @@ venv.bak/
 ignore
 ignore/*
 ldap_connection.py
+
+credentials_project
