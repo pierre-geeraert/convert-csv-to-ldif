@@ -6,3 +6,6 @@ class ldap:
 
 class pushbullet:
     token_pushbullet = "token_push"
+
+class vcf_file:
+    path = "Path of the vcf file"
