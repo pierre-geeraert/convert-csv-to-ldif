@@ -1,9 +1,13 @@
 import quopri
+import sys
 import credentials_project
 from ldap3 import Server, Connection
 
 
-path_vcf = credentials_project.ldif_file.path
+#path_vcf = credentials_project.vcf_file.path
+path_vcf = sys.argv[1]
+
+
 
 def ldap_connection(Server_url,id_ldap_in,password_ldap_in):
     server = Server(Server_url)
