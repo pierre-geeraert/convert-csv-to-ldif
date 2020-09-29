@@ -93,10 +93,9 @@ def number_present(dict,number):
     return return_value
 
 
-connection_ldap = ldap_connection(credentials_project.ldap2.server_ldap,credentials_project.ldap2.id_ldap,credentials_project.ldap2.password_ldap)
+connection_ldap = ldap_connection(credentials_project.ldap.server_ldap,credentials_project.ldap.id_ldap,credentials_project.ldap.password_ldap)
 
 with open(path_vcf, "r") as ins:
-
     id_contact = 0
     full_name="default"
     surname = ""
