@@ -5,8 +5,11 @@ from ldap3 import Server, Connection
 
 
 #path_vcf = credentials_project.vcf_file.path
-path_vcf = sys.argv[1]
-
+if sys.argv[1]:
+    path_vcf = sys.argv[1]
+else:
+    print("Usage program.py Vcf_file")
+    sys.exit()
 
 
 def ldap_connection(Server_url,id_ldap_in,password_ldap_in):
@@ -90,7 +93,7 @@ def number_present(dict,number):
     return return_value
 
 
-connection_ldap = ldap_connection(credentials_project.ldap.server_ldap,credentials_project.ldap.id_ldap,credentials_project.ldap.password_ldap)
+connection_ldap = ldap_connection(credentials_project.ldap2.server_ldap,credentials_project.ldap2.id_ldap,credentials_project.ldap2.password_ldap)
 
 with open(path_vcf, "r") as ins:
 
@@ -106,7 +109,6 @@ with open(path_vcf, "r") as ins:
             id_contact += 1
 
         if 'FN:' in line:
-
             full_name = str(line.translate({ord('\n'): None}))
             full_name = full_name.replace("FN:","")
 
@@ -168,7 +170,7 @@ with open(path_vcf, "r") as ins:
             if full_name!="default" and telephone != "default":
                 if not(check_number_already_present(connection_ldap, telephone, credentials_project.ldap.baseDN_ldap)):
                     print("--------------------")
-                    print(str(full_name)+" : "+str(telephone) + " non présent")
+                    print(str(full_name)+" : "+str(telephone) + " non present")
                     firstname = full_name.split()[0]
                     if (len(full_name.split())) == 1:
                         surname = ""
@@ -181,7 +183,7 @@ with open(path_vcf, "r") as ins:
 
                     print(write_into_ldap(connection_ldap,firstname,surname,birthday,telephone,email,address=False))
                 else:
-                    #print(str(full_name)+" : "+str(telephone) + " deja présent")
+                    #print(str(full_name)+" : "+str(telephone) + " deja present")
                     blank = 0
 
 
